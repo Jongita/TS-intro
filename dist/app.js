@@ -21,7 +21,7 @@ class Workers {
         return this.salary * 0.1252;
     }
 }
-const WorkerMas = [];
+let WorkerMas = [];
 const showlist = () => {
     const name = nameDOM.value;
     const surname = surnameDOM.value;
@@ -31,7 +31,7 @@ const showlist = () => {
     workersDOM.innerHTML = '';
     WorkerMas.forEach((w, i) => {
         const li = document.createElement('li');
-        li.textContent = `${w.name} ${w.surname} - Atlyginimas: ${w.salary}€, GPM: ${w.gpm()}€, PSD: ${w.psd()}€, VSD: ${w.vsd()}€`;
+        li.textContent = `${i + 1}: ${w.name} ${w.surname} - Atlyginimas: ${w.salary}€,\nGPM: ${w.gpm()}€, PSD: ${w.psd()}€, VSD: ${w.vsd()}€`;
         workersDOM.appendChild(li);
         const deleteBtn = document.createElement("button");
         deleteBtn.textContent = "Ištrinti";

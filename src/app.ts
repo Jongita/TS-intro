@@ -24,7 +24,7 @@ class Workers{
   }
 }
 
-const WorkerMas:Workers[]=[];
+let WorkerMas:Workers[]=[];
  
 const showlist=()=>{
     const name=nameDOM.value;
@@ -36,18 +36,19 @@ const showlist=()=>{
     workersDOM.innerHTML='';
       WorkerMas.forEach((w, i)=>{
         const li = document.createElement('li');
-        li.textContent = `${w.name} ${w.surname} - Atlyginimas: ${w.salary}€, GPM: ${w.gpm()}€, PSD: ${w.psd()}€, VSD: ${w.vsd()}€`;
+        li.textContent = `${i+1}: ${w.name} ${w.surname} - Atlyginimas: ${w.salary}€,\nGPM: ${w.gpm()}€, PSD: ${w.psd()}€, VSD: ${w.vsd()}€`;
         workersDOM.appendChild(li);
 
         const deleteBtn = document.createElement("button");
         deleteBtn.textContent = "Ištrinti";
         // deleteBtn.className = "btn btn-primary float-end btn-sm";
-
+        
+        
         deleteBtn.onclick = () => {
         WorkerMas.splice(i, 1);
         showlist()
-      };
-      workersDOM.appendChild(deleteBtn);
+        };
+        workersDOM.appendChild(deleteBtn);
     });
 }
 
