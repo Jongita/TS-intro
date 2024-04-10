@@ -1,33 +1,46 @@
 "use strict";
-const skaiciusXInp = document.getElementById("skaiciusx");
-const skaiciusYInp = document.getElementById("skaiciusy");
-const skaiciuotiBtn = document.getElementById("skaiciuoti");
+const nameDOM = document.getElementById("name");
+const surnameDOM = document.getElementById("surname");
+const salaryDOM = document.getElementById("salary");
+const workersDOM = document.getElementById("workerlist");
+const addBtn = document.getElementById("add");
 const rezultatasDiv = document.getElementById("rezultatas");
-/*
-if (skaiciuotiBtn!=null){
-    skaiciuotiBtn.onclick=()=>{
-        
+class Workers {
+    constructor(name, surname, salary) {
+        this.name = name;
+        this.surname = surname;
+        this.salary = salary;
+    }
+    gpm() {
+        return this.salary * 0.2;
+    }
+    psd() {
+        return this.salary * 0.0698;
+    }
+    vsd() {
+        return this.salary * 0.1252;
     }
 }
-*/
-class Skaiciai {
-    constructor(x, y) {
-        this.x = x;
-        this.y = y;
-    }
-    suma() {
-        return this.x + this.y;
-    }
-}
-const skaiciaiMas = [];
-skaiciuotiBtn.onclick = () => {
-    const x = skaiciusXInp.valueAsNumber;
-    const y = skaiciusYInp.valueAsNumber;
-    skaiciaiMas.push(new Skaiciai(x, y));
-    rezultatasDiv.innerHTML = '';
-    skaiciaiMas.forEach((s) => {
-        const div = document.createElement('div');
-        div.innerHTML = `${s.x} + ${s.y} = ${s.suma()}`;
-        rezultatasDiv.appendChild(div);
+const WorkerMas = [];
+const showlist = () => {
+    const name = nameDOM.value;
+    const surname = surnameDOM.value;
+    const salary = salaryDOM.valueAsNumber;
+    WorkerMas.push(new Workers(name, surname, salary));
+    console.log(WorkerMas);
+    workersDOM.innerHTML = '';
+    WorkerMas.forEach((w, i) => {
+        const li = document.createElement('li');
+        li.textContent = `${w.name} ${w.surname} - Atlyginimas: ${w.salary}€, GPM: ${w.gpm()}€, PSD: ${w.psd()}€, VSD: ${w.vsd()}€`;
+        workersDOM.appendChild(li);
+        const deleteBtn = document.createElement("button");
+        deleteBtn.textContent = "Ištrinti";
+        // deleteBtn.className = "btn btn-primary float-end btn-sm";
+        deleteBtn.onclick = () => {
+            WorkerMas.splice(i, 1);
+            showlist();
+        };
+        workersDOM.appendChild(deleteBtn);
     });
 };
+addBtn.onclick = showlist;
